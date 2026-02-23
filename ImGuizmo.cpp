@@ -1609,7 +1609,7 @@ namespace IMGUIZMO_NAMESPACE
          // draw plane
          if (!gContext.mbUsing || (gContext.mbUsing && type == MT_MOVE_YZ + i))
          {
-            if (belowPlaneLimit && Contains(op, TRANSLATE_PLANS[i]))
+            if (i == 2 && belowPlaneLimit && Contains(op, TRANSLATE_PLANS[i]))
             {
                ImVec2 screenQuadPts[4];
                for (int j = 0; j < 4; ++j)
@@ -2098,13 +2098,14 @@ namespace IMGUIZMO_NAMESPACE
       ImGuiIO& io = ImGui::GetIO();
       int type = MT_NONE;
 
-      // screen
-      if (io.MousePos.x >= gContext.mScreenSquareMin.x && io.MousePos.x <= gContext.mScreenSquareMax.x &&
-         io.MousePos.y >= gContext.mScreenSquareMin.y && io.MousePos.y <= gContext.mScreenSquareMax.y &&
-         Contains(op, TRANSLATE))
-      {
-         type = MT_MOVE_SCREEN;
-      }
+      // Turn off "screen" moving
+//      // screen
+//      if (io.MousePos.x >= gContext.mScreenSquareMin.x && io.MousePos.x <= gContext.mScreenSquareMax.x &&
+//         io.MousePos.y >= gContext.mScreenSquareMin.y && io.MousePos.y <= gContext.mScreenSquareMax.y &&
+//         Contains(op, TRANSLATE))
+//      {
+//         type = MT_MOVE_SCREEN;
+//      }
 
       const vec_t screenCoord = makeVect(io.MousePos - ImVec2(gContext.mX, gContext.mY));
 
@@ -2135,7 +2136,7 @@ namespace IMGUIZMO_NAMESPACE
 
          const float dx = dirPlaneX.Dot3((posOnPlan - gContext.mModel.v.position) * (1.f / gContext.mScreenFactor));
          const float dy = dirPlaneY.Dot3((posOnPlan - gContext.mModel.v.position) * (1.f / gContext.mScreenFactor));
-         if (belowPlaneLimit && dx >= quadUV[0] && dx <= quadUV[4] && dy >= quadUV[1] && dy <= quadUV[3] && Contains(op, TRANSLATE_PLANS[i]))
+         if (i == 2 && belowPlaneLimit && dx >= quadUV[0] && dx <= quadUV[4] && dy >= quadUV[1] && dy <= quadUV[3] && Contains(op, TRANSLATE_PLANS[i]))
          {
             if ((!isAxisMasked || isMultipleAxesMasked) && !isNoAxesMasked)
                break;
