@@ -2099,13 +2099,13 @@ namespace IMGUIZMO_NAMESPACE
       int type = MT_NONE;
 
       // Turn off "screen" moving
-//      // screen
-//      if (io.MousePos.x >= gContext.mScreenSquareMin.x && io.MousePos.x <= gContext.mScreenSquareMax.x &&
-//         io.MousePos.y >= gContext.mScreenSquareMin.y && io.MousePos.y <= gContext.mScreenSquareMax.y &&
-//         Contains(op, TRANSLATE))
-//      {
-//         type = MT_MOVE_SCREEN;
-//      }
+      // screen
+      if (io.MousePos.x >= gContext.mScreenSquareMin.x && io.MousePos.x <= gContext.mScreenSquareMax.x &&
+         io.MousePos.y >= gContext.mScreenSquareMin.y && io.MousePos.y <= gContext.mScreenSquareMax.y &&
+         Contains(op, TRANSLATE))
+      {
+         type = MT_MOVE_XY;
+      }
 
       const vec_t screenCoord = makeVect(io.MousePos - ImVec2(gContext.mX, gContext.mY));
 
